@@ -10,10 +10,13 @@ import { FooterComponent } from './footer/footer.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeesService } from './employees.service';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { PositionsService } from './positions.service';
 
 const appRoutes: Routes = [
     { path: '', component: EmployeesComponent },
-    { path: 'aboutMe', component: AboutMeComponent }
+    { path: 'aboutMe', component: AboutMeComponent },
+    { path: 'createEmployee', component: CreateEmployeeComponent }
 ]
 
 @NgModule({
@@ -23,13 +26,14 @@ const appRoutes: Routes = [
         NavBarComponent,
         FooterComponent,
         EmployeesComponent,
-        EmployeeComponent
+        EmployeeComponent,
+        CreateEmployeeComponent
     ],
     imports: [
         BrowserModule,
         RouterModule.forRoot(appRoutes)
     ],
-    providers: [EmployeesService],
+    providers: [EmployeesService, PositionsService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

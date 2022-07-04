@@ -13,6 +13,8 @@ export class EmployeesComponent implements OnInit {
 
     ngOnInit(): void {
         this.employees = this.employeesService.employees;
+        console.log(this.employees);
+        
     }
 
     employees!: Employee[];
