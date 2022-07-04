@@ -1,10 +1,11 @@
 import { Position } from "./position.model";
 
 export class Employee {
-    constructor(id: number, names: string, surnames: string, position: Position) {
+    constructor(id: number, names: string, surnames: string, dni: number, position: Position) {
         this.id = id;
         this.names = names;
         this.surnames = surnames;
+        this.dni = dni;
         this.position = position;
         this.creationDate = new Date();
     }
@@ -12,6 +13,7 @@ export class Employee {
     id: number;
     names: string;
     surnames: string;
+    dni: number;
     position: Position;
     creationDate: Date;
 
