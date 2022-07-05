@@ -15,11 +15,13 @@ import { PositionsService } from './positions.service';
 import { PositionsComponent } from './positions/positions.component';
 import { PositionComponent } from './position/position.component';
 import { CreatePositionComponent } from './create-position/create-position.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
     { path: '', component: EmployeesComponent },
     { path: 'aboutMe', component: AboutMeComponent },
     { path: 'positions', component: PositionsComponent },
+    { path: 'createPosition', component: CreatePositionComponent },
     { path: 'createEmployee', component: CreateEmployeeComponent }
 ]
 
@@ -38,6 +40,7 @@ const appRoutes: Routes = [
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [EmployeesService, PositionsService],

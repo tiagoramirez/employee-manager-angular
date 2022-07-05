@@ -6,6 +6,7 @@
     align-items: center;
     background-color: #202525;
     height: 3.5rem;
+    box-shadow: 0 1px 10px black;
 }
 
 a {

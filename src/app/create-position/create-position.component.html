@@ -1,1 +1,17 @@
-<p>create-position works!</p>
+<form>
+    <div class="name-form">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" placeholder="Nombre" [(ngModel)]="nameNewPosition">
+    </div>
+
+    <div class="salary-form">
+        <label for="salary">Salario</label>
+        <input type="number" name="salary" placeholder="Salario" [(ngModel)]="salaryNewPosition">
+    </div>
+
+    <div class="floor-form">
+        <label for="floor">Piso</label>
+        <input type="number" name="floor" placeholder="Piso" [(ngModel)]="floorNewPosition">
+    </div>
+    <button type="button" (click)="createPosition()"><i class="bi bi-save-fill"></i> GUARDAR</button>
+</form>

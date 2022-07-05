@@ -10,4 +10,8 @@ export class Position {
     name: string;
     salary: number;
     floor: number;
+
+    toString(){
+        return `${this.name} tiene salario de $${this.salary} y trabaja en el piso ${this.floor}`;
+    }
 }

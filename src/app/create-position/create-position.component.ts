@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PositionsService } from '../positions.service';
 
 @Component({
-  selector: 'app-create-position',
-  templateUrl: './create-position.component.html',
-  styleUrls: ['./create-position.component.css']
+    selector: 'app-create-position',
+    templateUrl: './create-position.component.html',
+    styleUrls: ['./create-position.component.css']
 })
-export class CreatePositionComponent implements OnInit {
+export class CreatePositionComponent {
 
-  constructor() { }
+    constructor(private positionsService: PositionsService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+    nameNewPosition: string = "";
+    salaryNewPosition!: number;
+    floorNewPosition!: number;
+
+    showError: boolean = false;
+
+    createPosition() {
+        this.positionsService.addNewPosition(this.nameNewPosition, this.salaryNewPosition, this.floorNewPosition) ? this.router.navigate(['positions']) : this.showError = true;
+    }
 
 }
