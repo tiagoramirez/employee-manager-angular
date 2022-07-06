@@ -6,12 +6,12 @@ import { Position } from './position.model';
 })
 export class PositionsService {
 
-    lastId: number = 0;
+    lastId: number = 2;
 
     positions: Position[] = [//hardcoded position for testing reasons
         new Position(0, 'Jefe de jefes', 9999.99, 5),
-        new Position(0, 'Jefe de programadores', 7999.99, 3),
-        new Position(0, 'Programadores junior', 2300.99, 8),
+        new Position(1, 'Jefe de programadores', 7999.99, 3),
+        new Position(2, 'Programadores junior', 2300.99, 8),
     ];
 
     addNewPosition(name: string, salary: number, floor: number): boolean {

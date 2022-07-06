@@ -1,16 +1,17 @@
 :host {
-    height: 85vh;
-    width: 95vw;
+    min-height: 85vh;
+    width: 75vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .floating-btn {
     position: fixed;
-    top: 4.2rem;
-    right: .7rem;
+    top: 7rem;
+    right: 4rem;
     height: 3rem;
     width: 3rem;
     background-color: #202525;
@@ -22,5 +23,5 @@
     align-items: center;
     text-decoration: none;
     font-size: 1.5rem;
-    box-shadow: 0 1px 10px rgba(0, 0, 0.3);
+    box-shadow: 0 1px 10px black;
 }
