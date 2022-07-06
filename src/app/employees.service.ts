@@ -12,17 +12,14 @@ export class EmployeesService {
     lastId: number = 0;
 
     employees: Employee[] = [//hardcoded employee for testing reasons
-        new Employee(0, "Tiago A.", "Ramirez M.", 11222333, this.positionService.positions[0])
+        new Employee(0, "Tiago A.", "Ramirez M.", 11222333, this.positionService.getPositions()[0])
     ];
 
-    addNewEmployee(names: string, surnames: string, dni: number, positionId: number): boolean {
+    addNewEmployee(names: string, surnames: string, dni: number, position: Position): boolean {
         if (names !== '' && surnames !== '' && dni.toString().length === 8) {
-            const positionNewEmployee = this.positionService.positions.find(x => x.id === positionId);
-            if (positionNewEmployee !== undefined) {
-                this.employees.push(new Employee(this.lastId + 1, names, surnames, dni, positionNewEmployee));
-                this.lastId++;
-                return true;
-            }
+            this.employees.push(new Employee(this.lastId + 1, names, surnames, dni, position));
+            this.lastId++;
+            return true;
         }
         return false;
     }

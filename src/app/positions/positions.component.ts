@@ -12,7 +12,7 @@ export class PositionsComponent implements OnInit {
     constructor(private positionsService: PositionsService) { }
 
     ngOnInit(): void {
-        this.positions = this.positionsService.positions;        
+        this.positions = this.positionsService.getPositions();
     }
 
     positions!: Position[];

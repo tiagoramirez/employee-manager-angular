@@ -1,4 +1,25 @@
 <form>
+    <div class="names-form">
+        <label for="names">Nombres</label>
+        <input type="text" name="names" placeholder="Nombres" [(ngModel)]="namesNewEmployee">
+    </div>
 
-    
+    <div class="surnames-form">
+        <label for="surnames">Apellidos</label>
+        <input type="text" name="surnames" placeholder="Apellidos" [(ngModel)]="surnamesNewEmployee">
+    </div>
+
+    <div class="dni-form">
+        <label for="dni">DNI</label>
+        <input type="number" name="dni" placeholder="DNI" [(ngModel)]="dniNewEmployee">
+    </div>
+
+    <div class="position-form">
+        <select [(ngModel)]="selectedIdPosition" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let position of positions" value={{position.id}}>
+                {{position.name}}
+            </option>
+        </select>
+    </div>
+    <button type="button" (click)="createEmployee()"><i class="bi bi-save-fill"></i> GUARDAR</button>
 </form>
