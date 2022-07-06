@@ -20,6 +20,13 @@ export class PositionsService {
         if (salary <= 0) {
             return 2;
         }
+        if (salary === undefined) {
+            return 5;
+        }
+        if (floor === undefined) {
+            return 4;
+        }
+
         this.positions.push(new Position(this.lastId + 1, name, salary, floor));
         this.lastId++;
 
@@ -70,6 +77,12 @@ export class PositionsService {
 
             case 3:
                 return "Error inesperado. Intentelo de nuevo.";
+
+            case 4:
+                return "No se ingreso el piso."
+
+            case 5:
+                return "No se ingreso el salario."
         }
         return "Error.";
     }

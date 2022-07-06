@@ -1,4 +1,5 @@
 <form>
+    <h1>Crear posicion</h1>
     <div class="name-form">
         <label for="name">Nombre</label>
         <input type="text" name="name" placeholder="Nombre" [(ngModel)]="nameNewPosition">
@@ -13,5 +14,6 @@
         <label for="floor">Piso</label>
         <input type="number" name="floor" placeholder="Piso" [(ngModel)]="floorNewPosition">
     </div>
-    <button type="button" (click)="createPosition()"><i class="bi bi-save-fill"></i> GUARDAR</button>
+    <p style="color: red;" *ngIf="showError">{{errorMessage}}</p>
+    <button type="button" (click)="createPosition()"><i class="bi bi-save"></i>Crear</button>
 </form>

@@ -16,9 +16,15 @@ export class CreatePositionComponent {
     floorNewPosition!: number;
 
     showError: boolean = false;
+    errorMessage: string = "";
 
     createPosition() {
-        this.positionsService.addNewPosition(this.nameNewPosition, this.salaryNewPosition, this.floorNewPosition) ? this.router.navigate(['positions']) : this.showError = true;
+        const errorNumber = this.positionsService.addNewPosition(this.nameNewPosition, this.salaryNewPosition, this.floorNewPosition);
+        if (errorNumber === 0) {
+            this.router.navigate(['/positions'])
+        }
+        this.showError = true;
+        this.errorMessage = this.positionsService.getErrorMessage(errorNumber);
     }
 
 }
