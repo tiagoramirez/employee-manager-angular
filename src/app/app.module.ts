@@ -16,13 +16,15 @@ import { PositionsComponent } from './positions/positions.component';
 import { PositionComponent } from './position/position.component';
 import { CreatePositionComponent } from './create-position/create-position.component';
 import { FormsModule } from '@angular/forms';
+import { ModifyPositionComponent } from './modify-position/modify-position.component';
 
 const appRoutes: Routes = [
     { path: '', component: EmployeesComponent },
     { path: 'aboutMe', component: AboutMeComponent },
     { path: 'positions', component: PositionsComponent },
     { path: 'createPosition', component: CreatePositionComponent },
-    { path: 'createEmployee', component: CreateEmployeeComponent }
+    { path: 'modifyPosition/:id', component: ModifyPositionComponent },
+    { path: 'createEmployee', component: CreateEmployeeComponent },
 ]
 
 @NgModule({
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
         CreateEmployeeComponent,
         PositionsComponent,
         PositionComponent,
-        CreatePositionComponent
+        CreatePositionComponent,
+        ModifyPositionComponent
     ],
     imports: [
         BrowserModule,

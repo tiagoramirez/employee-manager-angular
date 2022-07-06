@@ -34,24 +34,44 @@ export class PositionsService {
         return this.positions.filter(x => x.state === true);
     }
 
-    deletePoistion(id: number): boolean {
+    deletePoistion(id: number): number {
         try {
             this.positions[id].state = false;
-            return true;
+            return 0;
         } catch (error) {
-            return false;
+            return 3;
         }
     }
 
-    editPosition(id: number, newName: string, newSalary: number, newFloor: number): boolean {
-        try {
-            this.positions[id].name = newName;
-            this.positions[id].salary = newSalary;
-            this.positions[id].floor = newFloor;
-            this.positions[id].creationDate = new Date();
-            return true;
-        } catch (error) {
-            return false;
+    //return errorNumber. 0 means no error. 1 means no name error. 2 means salary <= 0 error. 3 means Unexpected error
+    editPosition(idToEdit: number, newName: string, newSalary: number, newFloor: number): number {
+
+        if (newName == '') {
+            return 1;
         }
+        if (newSalary <= 0) {
+            return 2;
+        }
+
+        try {
+            this.positions[idToEdit] = { id: idToEdit, name: newName, salary: newSalary, floor: newFloor, state: true, creationDate: new Date() }
+            return 0;
+        } catch (error) {
+            return 3;
+        }
+    }
+
+    getErrorMessage(errorNumber: number): string {
+        switch (errorNumber) {
+            case 1:
+                return "El nombre no puede estar vacio."
+
+            case 2:
+                return "El salario no puede ser menor o igual a 0."
+
+            case 3:
+                return "Error inesperado. Intentelo de nuevo."
+        }
+        return "Error."
     }
 }
