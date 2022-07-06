@@ -4,14 +4,18 @@ export class Position {
         this.name = name;
         this.salary = salary;
         this.floor = floor;
+        this.state = true;
+        this.creationDate = new Date();        
     }
-
+    
     id: number;
     name: string;
     salary: number;
     floor: number;
+    state: boolean;
+    creationDate: Date;
 
-    toString(){
+    toString() {
         return `${this.name} tiene salario de $${this.salary} y trabaja en el piso ${this.floor}`;
     }
 }

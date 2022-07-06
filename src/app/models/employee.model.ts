@@ -7,6 +7,7 @@ export class Employee {
         this.surnames = surnames;
         this.dni = dni;
         this.position = position;
+        this.state = true;
         this.creationDate = new Date();
     }
 
@@ -15,6 +16,7 @@ export class Employee {
     surnames: string;
     dni: number;
     position: Position;
+    state: boolean;
     creationDate: Date;
 
     toString(): string {

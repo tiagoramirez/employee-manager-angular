@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Employee } from './employee.model';
-import { Position } from './position.model';
+import { Employee } from '../models/employee.model';
+import { Position } from '../models/position.model';
 import { PositionsService } from './positions.service';
 
 @Injectable({

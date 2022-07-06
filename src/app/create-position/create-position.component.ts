@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PositionsService } from '../positions.service';
+import { PositionsService } from '../services/positions.service';
 
 @Component({
     selector: 'app-create-position',
