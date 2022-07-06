@@ -9,18 +9,72 @@ import { PositionsService } from './positions.service';
 export class EmployeesService {
     constructor(private positionService: PositionsService) { }
 
-    lastId: number = 0;
+    private lastId: number = 0;
 
-    employees: Employee[] = [//hardcoded employee for testing reasons
+    private employees: Employee[] = [//hardcoded employee for testing reasons
         new Employee(0, "Tiago A.", "Ramirez M.", 11222333, this.positionService.getPositions()[0])
     ];
 
-    addNewEmployee(names: string, surnames: string, dni: number, position: Position): boolean {
-        if (names !== '' && surnames !== '' && dni.toString().length === 8) {
-            this.employees.push(new Employee(this.lastId + 1, names, surnames, dni, position));
-            this.lastId++;
-            return true;
+    addNewEmployee(names: string, surnames: string, dni: number, position: Position): number {
+        if (names === '') {
+            return 1;
         }
-        return false;
+        if (surnames === '') {
+            return 2;
+        }
+        if (dni.toString().length !== 8) {
+            return 3;
+        }
+        this.employees.push(new Employee(this.lastId + 1, names, surnames, dni, position));
+        this.lastId++;
+        return 0;
+    }
+
+    getEmployeeById(id: number): Employee {
+        return this.employees[id];
+    }
+
+    getEmployees(): Employee[] {
+        return this.employees.filter(emp => emp.state === true);
+    }
+
+    deletePoistion(id: number): number {
+        try {
+            this.employees[id].state = false;
+            return 0;
+        } catch (error) {
+            return 4;
+        }
+    }
+
+    editPosition(idToEdit: number, newNames: string, newSurnames: string, newDni: number, newPosition: Position): number {
+
+        if (newNames == '') {
+            return 1;
+        }
+
+        try {
+            this.employees[idToEdit] = { id: idToEdit, names: newNames, surnames: newSurnames, dni: newDni, position: newPosition, state: true, creationDate: new Date() }
+            return 0;
+        } catch (error) {
+            return 3;
+        }
+    }
+
+    getErrorMessage(errorNumber: number): string {
+        switch (errorNumber) {
+            case 1:
+                return "El nombre no puede estar vacio.";
+
+            case 2:
+                return "El apellido no puede estar vacio.";
+
+            case 3:
+                return "D.N.I. incorrecto.";
+
+            case 4:
+                return "Error inesperado. Intentelo de nuevo.";
+        }
+        return "Error.";
     }
 }

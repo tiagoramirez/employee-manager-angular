@@ -5,7 +5,7 @@ import { Position } from '../models/position.model';
     providedIn: 'root'
 })
 export class PositionsService {
-    lastId: number = 2;
+    private lastId: number = 2;
 
     private positions: Position[] = [//hardcoded position for testing reasons
         new Position(0, 'Jefe de jefes', 9999.99, 5),
@@ -13,7 +13,6 @@ export class PositionsService {
         new Position(2, 'Programadores junior', 2300.99, 8),
     ];
 
-    //return errorNumber. 0 means no error. 1 means no name error. 2 means salary <= 0 error.
     addNewPosition(name: string, salary: number, floor: number): number {
         if (name === '') {
             return 1;
@@ -22,6 +21,7 @@ export class PositionsService {
             return 2;
         }
         this.positions.push(new Position(this.lastId + 1, name, salary, floor));
+        this.lastId++;
 
         return 0;
     }
@@ -31,7 +31,7 @@ export class PositionsService {
     }
 
     getPositions(): Position[] {
-        return this.positions.filter(x => x.state === true);
+        return this.positions.filter(pos => pos.state === true);
     }
 
     deletePoistion(id: number): number {
@@ -43,7 +43,6 @@ export class PositionsService {
         }
     }
 
-    //return errorNumber. 0 means no error. 1 means no name error. 2 means salary <= 0 error. 3 means Unexpected error
     editPosition(idToEdit: number, newName: string, newSalary: number, newFloor: number): number {
 
         if (newName == '') {
@@ -64,14 +63,14 @@ export class PositionsService {
     getErrorMessage(errorNumber: number): string {
         switch (errorNumber) {
             case 1:
-                return "El nombre no puede estar vacio."
+                return "El nombre no puede estar vacio.";
 
             case 2:
-                return "El salario no puede ser menor o igual a 0."
+                return "El salario no puede ser menor o igual a 0.";
 
             case 3:
-                return "Error inesperado. Intentelo de nuevo."
+                return "Error inesperado. Intentelo de nuevo.";
         }
-        return "Error."
+        return "Error.";
     }
 }
