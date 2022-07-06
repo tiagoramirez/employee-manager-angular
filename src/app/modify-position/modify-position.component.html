@@ -1,20 +1,22 @@
 <form>
+    <h1 *ngIf="action==='delete'">Eliminar posicion</h1>
+    <h1 *ngIf="action==='edit'">Modificar posicion</h1>
     <div class="name-form">
         <label for="name">Nombre</label>
         <input type="text" name="name" placeholder="Nombre" [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newName">
+            [(ngModel)]="newName" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
 
     <div class="salary-form">
         <label for="salary">Salario</label>
         <input type="number" name="salary" placeholder="Salario" [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newSalary">
+            [(ngModel)]="newSalary" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
 
     <div class="floor-form">
         <label for="floor">Piso</label>
         <input type="number" name="floor" placeholder="Piso" [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newFloor">
+            [(ngModel)]="newFloor" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
     <p style="color: red;" *ngIf="showError">{{errorMessage}}</p>
     <button type="button" *ngIf="action==='edit'" (click)="modifyPosition()"><i class="bi bi-pencil-square"></i>

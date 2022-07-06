@@ -1,5 +1,5 @@
 form {
-    height: 50vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -42,7 +42,17 @@ form {
     min-width: 30vw;
 }
 
-div{
+.inputDisabled {
+    color: #fa8d8d;
+}
+
+h1 {
+    color: #90afc5;
+    font-weight: bold;
+    margin: 0;
+}
+
+div {
     margin: 1rem;
 }
 
