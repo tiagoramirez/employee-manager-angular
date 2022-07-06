@@ -1,4 +1,5 @@
 <form>
+    <h1>Crear empleado</h1>
     <div class="names-form">
         <label for="names">Nombres</label>
         <input type="text" name="names" placeholder="Nombres" [(ngModel)]="namesNewEmployee">
@@ -15,11 +16,13 @@
     </div>
 
     <div class="position-form">
+        <label for="position">Posicion</label>
         <select [(ngModel)]="selectedIdPosition" [ngModelOptions]="{standalone: true}">
             <option *ngFor="let position of positions" value={{position.id}}>
                 {{position.name}}
             </option>
         </select>
     </div>
+    <p style="color: red;" *ngIf="showError">{{errorMessage}}</p>
     <button type="button" (click)="createEmployee()"><i class="bi bi-save-fill"></i> GUARDAR</button>
 </form>

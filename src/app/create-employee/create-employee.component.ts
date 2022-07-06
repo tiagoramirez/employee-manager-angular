@@ -18,17 +18,22 @@ export class CreateEmployeeComponent implements OnInit {
         this.positions = this.positionService.getPositions();
     }
 
-    showError: boolean = false;
-
     positions!: Position[]
 
-    selectedIdPosition: number = -1;
+    selectedIdPosition!: number;
+    namesNewEmployee!: string;
+    surnamesNewEmployee!: string;
+    dniNewEmployee!: number;
 
-    namesNewEmployee: string = "";
-    surnamesNewEmployee: string = "";
-    dniNewEmployee: number = 0;
+    showError: boolean = false;
+    errorMessage: string = "";
 
-    createEmployee() {        
-        this.employeeService.addNewEmployee(this.namesNewEmployee, this.surnamesNewEmployee, this.dniNewEmployee, this.positionService.getPositionById(this.selectedIdPosition)) ? this.router.navigate(['']) : this.showError = true;
+    createEmployee() {
+        const errorNumber = this.employeeService.addNewEmployee(this.namesNewEmployee, this.surnamesNewEmployee, this.dniNewEmployee, this.positionService.getPositionById(this.selectedIdPosition));
+        if (errorNumber === 0) {
+            this.router.navigate(['']);
+        }
+        this.showError = true;
+        this.errorMessage = this.employeeService.getErrorMessage(errorNumber);
     }
 }

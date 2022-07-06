@@ -16,15 +16,19 @@ export class EmployeesService {
     ];
 
     addNewEmployee(names: string, surnames: string, dni: number, position: Position): number {
-        if (names === '') {
+        if (names === undefined || names === '') {
             return 1;
         }
-        if (surnames === '') {
+        if (surnames === undefined || surnames === '') {
             return 2;
         }
-        if (dni.toString().length !== 8) {
+        if (dni === undefined || dni.toString().length !== 8) {
             return 3;
         }
+        if (position === undefined) {
+            return 5;
+        }
+
         this.employees.push(new Employee(this.lastId + 1, names, surnames, dni, position));
         this.lastId++;
         return 0;
@@ -74,6 +78,9 @@ export class EmployeesService {
 
             case 4:
                 return "Error inesperado. Intentelo de nuevo.";
+
+            case 5:
+                return "No se selecciono una posicion.";
         }
         return "Error.";
     }
