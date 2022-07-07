@@ -6,7 +6,7 @@ form {
     align-items: center;
 }
 
-.name-form {
+.names-form {
     background-color: #202525;
     box-shadow: 0 1px 10px;
     border-radius: 1rem;
@@ -18,7 +18,7 @@ form {
     min-width: 30vw;
 }
 
-.salary-form {
+.surnames-form {
     background-color: #202525;
     box-shadow: 0 1px 10px;
     border-radius: 1rem;
@@ -30,7 +30,19 @@ form {
     min-width: 30vw;
 }
 
-.floor-form {
+.dni-form {
+    background-color: #202525;
+    box-shadow: 0 1px 10px;
+    border-radius: 1rem;
+    padding: .75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    min-width: 30vw;
+}
+
+.position-form {
     background-color: #202525;
     box-shadow: 0 1px 10px;
     border-radius: 1rem;
@@ -96,4 +108,13 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+select {
+    background-color: #2a3132;
+    border: 0;
+    border-radius: 1rem;
+    padding: .5rem;
+    text-align: center;
+    color: #90afc5;
 }

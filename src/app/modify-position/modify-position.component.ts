@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Position } from '../models/position.model';
 import { PositionsService } from '../services/positions.service';
@@ -37,7 +37,7 @@ export class ModifyPositionComponent implements OnInit {
 
     modifyPosition() {
         if (this.action === "delete") {
-            const errorNumber = this.positionService.deletePoistion(this.positionToModify.id);
+            const errorNumber = this.positionService.deletePosition(this.positionToModify.id);
             if (errorNumber === 0) {
                 this.router.navigate(['/positions'])
             }

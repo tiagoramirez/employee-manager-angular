@@ -41,7 +41,7 @@ export class PositionsService {
         return this.positions.filter(pos => pos.state === true);
     }
 
-    deletePoistion(id: number): number {
+    deletePosition(id: number): number {
         try {
             this.positions[id].state = false;
             return 0;

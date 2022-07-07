@@ -42,7 +42,7 @@ export class EmployeesService {
         return this.employees.filter(emp => emp.state === true);
     }
 
-    deletePoistion(id: number): number {
+    deleteEmployee(id: number): number {
         try {
             this.employees[id].state = false;
             return 0;
@@ -51,8 +51,7 @@ export class EmployeesService {
         }
     }
 
-    editPosition(idToEdit: number, newNames: string, newSurnames: string, newDni: number, newPosition: Position): number {
-
+    editEmployee(idToEdit: number, newNames: string, newSurnames: string, newDni: number, newPosition: Position): number {
         if (newNames == '') {
             return 1;
         }
