@@ -18,6 +18,7 @@ import { CreatePositionComponent } from './create-position/create-position.compo
 import { FormsModule } from '@angular/forms';
 import { ModifyPositionComponent } from './modify-position/modify-position.component';
 import { ModifyEmployeeComponent } from './modify-employee/modify-employee.component';
+import { NotFoundErrorComponent } from './not-found-error/not-found-error.component';
 
 const appRoutes: Routes = [
     { path: '', component: EmployeesComponent },
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
     { path: 'modifyPosition/:id', component: ModifyPositionComponent },
     { path: 'createEmployee', component: CreateEmployeeComponent },
     { path: 'modifyEmployee/:id', component: ModifyEmployeeComponent },
+    { path: '**', component: NotFoundErrorComponent },
 ]
 
 @NgModule({
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
         PositionComponent,
         CreatePositionComponent,
         ModifyPositionComponent,
-        ModifyEmployeeComponent
+        ModifyEmployeeComponent,
+        NotFoundErrorComponent
     ],
     imports: [
         BrowserModule,
