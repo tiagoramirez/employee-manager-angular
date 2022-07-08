@@ -52,8 +52,20 @@ export class EmployeesService {
     }
 
     editEmployee(idToEdit: number, newNames: string, newSurnames: string, newDni: number, newPosition: Position): number {
-        if (newNames == '') {
+        if (newNames == '' || newNames === undefined) {
             return 1;
+        }
+        if (newSurnames == '' || newSurnames === undefined) {
+            return 2;
+        }
+        if (newDni === undefined) {
+            return 3;
+        }
+        if (newDni.toString().length !== 8) {
+            return 3;
+        }
+        if (newPosition === undefined) {
+            return 5;
         }
 
         try {

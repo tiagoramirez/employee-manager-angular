@@ -53,7 +53,7 @@ export class ModifyEmployeeComponent implements OnInit {
             this.errorMessage = this.employeesService.getErrorMessage(errorNumber);
         }
         if (this.action === "edit") {
-            const errorNumber = this.employeesService.editEmployee(this.employeeToModify.id, this.newNames, this.newSurnames, this.newDni, this.positionsService.getPositionById(this.selectedPositionId));
+            const errorNumber = this.employeesService.editEmployee(this.employeeToModify.id, this.newNames, this.newSurnames, this.newDni, this.positionsService.getPositionById(this.selectedPositionId));            
             if (errorNumber === 0) {
                 this.router.navigate([''])
             }
