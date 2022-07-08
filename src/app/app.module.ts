@@ -19,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { ModifyPositionComponent } from './modify-position/modify-position.component';
 import { ModifyEmployeeComponent } from './modify-employee/modify-employee.component';
 import { NotFoundErrorComponent } from './not-found-error/not-found-error.component';
+import { DataService } from './services/data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
     { path: '', component: EmployeesComponent },
@@ -50,9 +52,10 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         FormsModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        HttpClientModule,
     ],
-    providers: [EmployeesService, PositionsService],
+    providers: [EmployeesService, PositionsService, DataService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

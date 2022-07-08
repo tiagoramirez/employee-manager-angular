@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+    import { Injectable } from '@angular/core';
 import { Position } from '../models/position.model';
+import { DataService } from './data.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PositionsService {
+
+    constructor(private dataService: DataService) { }
+
     private lastId: number = 2;
 
     private positions: Position[] = [//hardcoded position for testing reasons
@@ -28,6 +32,7 @@ export class PositionsService {
         }
 
         this.positions.push(new Position(this.lastId + 1, name, salary, floor));
+        this.dataService.savePositions(this.positions);
         this.lastId++;
 
         return 0;

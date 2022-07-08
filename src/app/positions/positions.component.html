@@ -1,5 +1,5 @@
 <app-position *ngFor="let position of positions" [position]="position"></app-position>
 
-<a href="./createPosition" class="floating-btn">
+<a [routerLink]="['/createPosition']" class="floating-btn">
     <i class="bi bi-plus-circle-dotted"></i>
 </a>
