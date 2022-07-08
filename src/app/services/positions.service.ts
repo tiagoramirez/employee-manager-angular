@@ -20,10 +20,10 @@ export class PositionsService {
         if (salary <= 0) {
             return 2;
         }
-        if (salary === undefined) {
+        if (salary === undefined || salary === null) {
             return 5;
         }
-        if (floor === undefined) {
+        if (floor === undefined || floor === null) {
             return 4;
         }
 

@@ -22,7 +22,10 @@ export class EmployeesService {
         if (surnames === undefined || surnames === '') {
             return 2;
         }
-        if (dni === undefined || dni.toString().length !== 8) {
+        if (dni === undefined || dni === null) {
+            return 3;
+        }
+        if (dni.toString().length !== 8) {
             return 3;
         }
         if (position === undefined) {
@@ -58,7 +61,7 @@ export class EmployeesService {
         if (newSurnames == '' || newSurnames === undefined) {
             return 2;
         }
-        if (newDni === undefined) {
+        if (newDni === undefined || newDni === null) {
             return 3;
         }
         if (newDni.toString().length !== 8) {
