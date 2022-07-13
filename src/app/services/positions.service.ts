@@ -29,8 +29,10 @@ export class PositionsService {
         return this.dataService.updatePosition(idToEdit, position);
     }
 
-    // deletePosition(id: number): number {
-    // }
+    deletePosition(id: string, position: PositionI): Observable<PositionI> {
+        position.state = false;
+        return this.dataService.updatePosition(id, position);
+    }
 
     checkPosition(position: PositionI): number {
         if (position.name === '') {

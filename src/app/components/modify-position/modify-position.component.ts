@@ -15,10 +15,9 @@ export class ModifyPositionComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute, private router: Router, private positionService: PositionsService) { }
 
     ngOnInit(): void {
-        const idToModify = this.route.snapshot.params['id'];
-        let sub: Subscription = this.positionService.getById(idToModify).subscribe(response => {
+        this.idToModify = this.route.snapshot.params['id'];
+        let sub: Subscription = this.positionService.getById(this.idToModify).subscribe(response => {
             this.positionToModify = response;
-            this.positionToModify.id = idToModify;
         });
         this.subsContainer.add(sub);
         this.action = this.route.snapshot.queryParams['action'];
@@ -38,26 +37,32 @@ export class ModifyPositionComponent implements OnInit, OnDestroy {
         creationDate: null
     };
 
+    idToModify: string;
+
     action: string;
 
     showError: boolean = false;
     errorMessage: string = "";
 
     modifyPosition() {
-        // if (this.action === "delete") {
-        //     const errorNumber = this.positionService.deletePosition(this.positionToModify.id);
-        //     if (errorNumber === 0) {
-        //         this.router.navigate(['/positions'])
-        //     }
-        //     this.showError = true;
-        //     this.errorMessage = this.positionService.getErrorMessage(errorNumber);
-        // }
-        if (this.action === "edit") {
+        if (this.action === "delete") {
             const errorNumber = this.positionService.checkPosition(this.positionToModify);
-            console.log(errorNumber);
 
             if (errorNumber === 0) {
-                let sub: Subscription = this.positionService.update(this.positionToModify.id, this.positionToModify).subscribe(r => {
+                let sub: Subscription = this.positionService.deletePosition(this.idToModify, this.positionToModify).subscribe(r => {
+                    this.subsContainer.add(sub);
+                    this.router.navigate(['/positions']);
+                });
+            }
+            this.showError = true;
+            this.errorMessage = this.positionService.getErrorMessage(errorNumber);
+        }
+
+        if (this.action === "edit") {
+            const errorNumber = this.positionService.checkPosition(this.positionToModify);
+
+            if (errorNumber === 0) {
+                let sub: Subscription = this.positionService.update(this.idToModify, this.positionToModify).subscribe(r => {
                     this.subsContainer.add(sub);
                     this.router.navigate(['/positions']);
                 });
