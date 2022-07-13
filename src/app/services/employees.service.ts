@@ -1,101 +1,81 @@
 import { Injectable } from '@angular/core';
-import { Employee } from '../models/employee.model';
-import { PositionI } from '../models/position.interface';
-import { PositionsService } from './positions.service';
+import { Observable } from 'rxjs';
+import { EmployeeI } from '../models/employee.interface';
+import { DataService } from './data.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EmployeesService {
-    // constructor(private positionService: PositionsService) { }
+    constructor(private dataService: DataService) { }
 
-    // private lastId: number = 0;
+    getAll(): Observable<EmployeeI[]> {
+        return this.dataService.getAllEmployees();
+    }
 
-    // private employees: Employee[] = [//hardcoded employee for testing reasons
-    //     new Employee(0, "Tiago A.", "Ramirez M.", 11222333, this.positionService.getPositions()[0])
-    // ];
+    addNew(employee: EmployeeI): Observable<EmployeeI> {
+        return this.dataService.addNewEmployee(employee);
+    }
 
-    // addNewEmployee(names: string, surnames: string, dni: number, position: PositionI): number {
-    //     if (names === undefined || names === '') {
-    //         return 1;
-    //     }
-    //     if (surnames === undefined || surnames === '') {
-    //         return 2;
-    //     }
-    //     if (dni === undefined || dni === null) {
-    //         return 3;
-    //     }
-    //     if (dni.toString().length !== 8) {
-    //         return 3;
-    //     }
-    //     if (position === undefined) {
-    //         return 5;
-    //     }
+    getById(id: string): Observable<EmployeeI> {
+        return this.dataService.getEmployeeById(id);
+    }
 
-    //     this.employees.push(new Employee(this.lastId + 1, names, surnames, dni, position));
-    //     this.lastId++;
-    //     return 0;
-    // }
+    update(idToEdit: string, employee: EmployeeI) {
+        return this.dataService.updateEmployee(idToEdit, employee);
+    }
 
-    // getEmployeeById(id: number): Employee {
-    //     return this.employees[id];
-    // }
+    delete(id: string, employee: EmployeeI) {
+        return this.dataService.updateEmployee(id, employee);
+    }
 
-    // getEmployees(): Employee[] {
-    //     return this.employees.filter(emp => emp.state === true);
-    // }
+    checkEmployee(employee: EmployeeI): number {
+        if (employee.names === '' || employee.names === undefined || employee.names === null) {
+            return 1;
+        }
+        
+        if (employee.surnames === '' || employee.surnames === undefined || employee.surnames === null) {
+            return 2;
+        }
 
-    // deleteEmployee(id: number): number {
-    //     try {
-    //         this.employees[id].state = false;
-    //         return 0;
-    //     } catch (error) {
-    //         return 4;
-    //     }
-    // }
+        if (employee.dni === undefined || employee.dni === null) {
+            return 3;
+        }
 
-    // editEmployee(idToEdit: number, newNames: string, newSurnames: string, newDni: number, newPosition: PositionI): number {
-    //     if (newNames == '' || newNames === undefined) {
-    //         return 1;
-    //     }
-    //     if (newSurnames == '' || newSurnames === undefined) {
-    //         return 2;
-    //     }
-    //     if (newDni === undefined || newDni === null) {
-    //         return 3;
-    //     }
-    //     if (newDni.toString().length !== 8) {
-    //         return 3;
-    //     }
-    //     if (newPosition === undefined) {
-    //         return 5;
-    //     }
+        if (employee.dni.toString().length != 8 || employee.dni <= 0) {
+            return 4;
+        }
 
-    //     try {
-    //         this.employees[idToEdit] = { id: idToEdit, names: newNames, surnames: newSurnames, dni: newDni, position: newPosition, state: true, creationDate: new Date() }
-    //         return 0;
-    //     } catch (error) {
-    //         return 3;
-    //     }
-    // }
+        if (employee.position === undefined || employee.position === null) {
+            return 5;
+        }
 
-    // getErrorMessage(errorNumber: number): string {
-    //     switch (errorNumber) {
-    //         case 1:
-    //             return "El nombre no puede estar vacio.";
+        return 0;
+    }
 
-    //         case 2:
-    //             return "El apellido no puede estar vacio.";
+    getErrorMessage(errorNumber: number): string {
+        switch (errorNumber) {
+            case 0:
+                return "";
 
-    //         case 3:
-    //             return "D.N.I. incorrecto.";
+            case 1:
+                return "No se ingreso nombre.";
 
-    //         case 4:
-    //             return "Error inesperado. Intentelo de nuevo.";
+            case 2:
+                return "No se ingreso apellido.";
 
-    //         case 5:
-    //             return "No se selecciono una posicion.";
-    //     }
-    //     return "Error.";
-    // }
+            case 3:
+                return "No se ingreso D.N.I.";
+
+            case 4:
+                return "D.N.I. incorrecto.";
+
+            case 5:
+                return "No se selecciono una posicion.";
+
+            case 6:
+                return "Error inesperado. Intentelo de nuevo.";
+        }
+        return "Error.";
+    }
 }

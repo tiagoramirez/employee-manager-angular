@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from '../../models/employee.model';
+import { EmployeeI } from '../../models/employee.interface';
 import { EmployeesService } from '../../services/employees.service';
 
 @Component({
@@ -15,5 +15,5 @@ export class EmployeesComponent {
     //     this.employees = this.employeesService.getEmployees();
     // }
 
-    // employees!: Employee[];
+    // employees!: EmployeeI[];
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SubscriptionContainer } from '../helpers/subscriptionContainer';
 import { PositionI } from '../models/position.interface';
 import { DataService } from './data.service';
 
@@ -10,8 +9,6 @@ import { DataService } from './data.service';
 export class PositionsService {
 
     constructor(private dataService: DataService) { }
-
-    subsContainer: SubscriptionContainer = new SubscriptionContainer();
 
     getAll(): Observable<PositionI[]> {
         return this.dataService.getAllPositions();
@@ -35,18 +32,22 @@ export class PositionsService {
     }
 
     checkPosition(position: PositionI): number {
-        if (position.name === '') {
+        if (position.name === '' || position.name === undefined || position.name === null) {
             return 1;
         }
-        if (position.salary <= 0) {
+
+        if(position.salary===undefined || position.salary===null){
             return 2;
         }
-        if (position.salary === undefined || position.salary === null) {
-            return 5;
+
+        if (position.salary <= 0) {
+            return 3;
         }
+
         if (position.floor === undefined || position.floor === null) {
             return 4;
         }
+        
         return 0;
     }
 
@@ -54,20 +55,21 @@ export class PositionsService {
         switch (errorNumber) {
             case 0:
                 return "";
+
             case 1:
-                return "El nombre no puede estar vacio.";
-
+                return "No se ingreso nombre.";
+            
             case 2:
-                return "El salario no puede ser menor o igual a 0.";
-
+                return "No se ingreso salario.";
+            
             case 3:
-                return "Error inesperado. Intentelo de nuevo.";
-
+                return "El salario no puede ser menor o igual a 0.";
+            
             case 4:
-                return "No se ingreso el piso."
+                return "No se ingreso el piso.";
 
             case 5:
-                return "No se ingreso el salario."
+                return "Error inesperado. Intentelo de nuevo.";
         }
         return "Error.";
     }

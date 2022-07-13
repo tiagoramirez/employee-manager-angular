@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Employee } from '../../models/employee.model';
+import { EmployeeI } from '../../models/employee.interface';
 import { PositionI } from '../../models/position.interface';
 import { EmployeesService } from '../../services/employees.service';
 import { PositionsService } from '../../services/positions.service';
@@ -29,7 +29,7 @@ export class ModifyEmployeeComponent {
     // }
 
 
-    // employeeToModify!: Employee;
+    // employeeToModify!: EmployeeI;
 
     // positionsToSelect!: PositionI[];
     // selectedPositionId!: number;
