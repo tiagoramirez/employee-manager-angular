@@ -1,7 +1,7 @@
 import { Subscription } from "rxjs";
 
 export class SubscriptionContainer {
-    private subscriptions: Subscription[] = [];
+    subscriptions: Subscription[] = [];
 
     add(subscription: Subscription) {
         this.subscriptions.push(subscription);
