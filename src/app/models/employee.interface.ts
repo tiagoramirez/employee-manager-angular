@@ -1,11 +1,11 @@
 import { PositionI } from "./position.interface";
 
 export class EmployeeI {
-    id: number;
+    id?: string;
     names: string;
     surnames: string;
     dni: number;
-    position: PositionI;
+    positionId: string;
     state: boolean;
     creationDate: Date;
 }

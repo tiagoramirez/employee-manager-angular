@@ -1,5 +1,13 @@
-<!-- <app-employee *ngFor="let employee of employees" [employee]="employee"></app-employee>
+<h1>Empleados</h1>
+
+<h2 *ngIf="employees.length==0 && !cargando">No hay empleados cargados</h2>
+
+<h3 *ngIf="cargando">Cargando...</h3>
+
+<div class="employees-container">
+    <app-employee *ngFor="let employee of employees" [employee]="employee"></app-employee>
+</div>
 
 <a [routerLink]="['/createEmployee']" class="floating-btn">
     <i class="bi bi-person-plus"></i>
-</a> -->
+</a>

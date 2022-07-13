@@ -58,3 +58,11 @@ p {
     align-items: center;
     justify-content: center;
 }
+
+span {
+    color: red;
+}
+
+span:hover {
+    cursor: pointer;
+}

@@ -1,27 +1,27 @@
-<!-- <form>
+<form>
     <h1 *ngIf="action==='delete'">Eliminar empleado</h1>
     <h1 *ngIf="action==='edit'">Modificar empleado</h1>
     <div class="names-form">
         <label for="names">Nombres</label>
         <input type="text" name="names" placeholder="Nombres" [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newNames" [ngClass]="{inputDisabled:action==='delete'}">
+            [(ngModel)]="employeeToModify.names" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
 
     <div class="surnames-form">
         <label for="surnames">Apellidos</label>
         <input type="text" name="surnames" placeholder="Apellidos" [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newSurnames" [ngClass]="{inputDisabled:action==='delete'}">
+            [(ngModel)]="employeeToModify.surnames" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
 
     <div class="dni-form">
         <label for="dni">D.N.I.</label>
         <input type="number" name="dni" placeholder="D.N.I." [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newDni" [ngClass]="{inputDisabled:action==='delete'}">
+            [(ngModel)]="employeeToModify.dni" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
 
     <div class="position-form">
         <label for="position">Posicion</label>
-        <select [(ngModel)]="selectedPositionId" [ngModelOptions]="{standalone: true}"
+        <select [(ngModel)]="employeeToModify.positionId" [ngModelOptions]="{standalone: true}"
             [attr.disabled]="action==='delete'?true:null" [ngClass]="{inputDisabled:action==='delete'}">
             <option *ngFor="let position of positionsToSelect" value={{position.id}}>
                 {{position.name}}
@@ -34,4 +34,4 @@
         Guardar</button>
     <button type="button" *ngIf="action==='delete'" (click)="modifyEmployee()"><i
             class="bi bi-trash3"></i>Eliminar</button>
-</form> -->
+</form>

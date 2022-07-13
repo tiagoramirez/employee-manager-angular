@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { SubscriptionContainer } from 'src/app/helpers/subscriptionContainer';
 import { EmployeeI } from '../../models/employee.interface';
 import { PositionI } from '../../models/position.interface';
 import { EmployeesService } from '../../services/employees.service';
@@ -10,56 +12,71 @@ import { PositionsService } from '../../services/positions.service';
     templateUrl: './modify-employee.component.html',
     styleUrls: ['./modify-employee.component.css']
 })
-export class ModifyEmployeeComponent {
+export class ModifyEmployeeComponent implements OnInit, OnDestroy {
 
-    // constructor(private route: ActivatedRoute, private router: Router, private employeesService: EmployeesService, private positionsService: PositionsService) { }
+    constructor(private route: ActivatedRoute, private router: Router, private employeesService: EmployeesService, private positionService: PositionsService) { }
+    ngOnInit(): void {
+        this.idToModify = this.route.snapshot.params['id'];
 
-    // ngOnInit(): void {
+        let subEmployees: Subscription = this.employeesService.getById(this.idToModify).subscribe(response => {
+            this.employeeToModify = response;
+            this.subsContainer.add(subEmployees);
+        });
 
-    //     this.employeeToModify = this.employeesService.getEmployeeById(this.route.snapshot.params['id']);
+        let subPositions: Subscription = this.positionService.getAll().subscribe(response => {
+            Object.entries(response).forEach(item => {
+                item[1].state ? this.positionsToSelect.push({
+                    id: item[0],
+                    ...item[1]
+                }) : null;
+            })
+            this.subsContainer.add(subPositions);
+        });
 
-    //     this.newNames = this.employeeToModify.names;
-    //     this.newSurnames = this.employeeToModify.surnames;        
-    //     this.newDni = this.employeeToModify.dni;
-    //     this.selectedPositionId = this.employeeToModify.position.id;
+        this.action = this.route.snapshot.queryParams['action'];
+    }
 
-    //     this.positionsToSelect = this.positionsService.getPositions();
+    ngOnDestroy(): void {
+        this.subsContainer.unsubscribeAll();
+    }
 
-    //     this.action = this.route.snapshot.queryParams['action'];
-    // }
+    subsContainer: SubscriptionContainer = new SubscriptionContainer();
+
+    idToModify: string;
+
+    employeeToModify: EmployeeI = {
+        names: "Cargando...",
+        surnames: "Cargando...",
+        dni: 0,
+        positionId: null,
+        state: true,
+        creationDate: null,
+    };
+
+    positionsToSelect: PositionI[] = [];
+
+    action: string;
 
 
-    // employeeToModify!: EmployeeI;
+    showError: boolean = false;
+    errorMessage: string = "";
 
-    // positionsToSelect!: PositionI[];
-    // selectedPositionId!: number;
+    modifyEmployee() {
+        const errorNumber = this.employeesService.checkEmployee(this.employeeToModify);
+        if (this.action === "delete" && errorNumber === 0) {
+            let sub: Subscription = this.employeesService.delete(this.idToModify, this.employeeToModify).subscribe(res => {
+                this.subsContainer.add(sub);
+                this.router.navigate([''])
+            });
+        }
+        if (this.action === "edit" && errorNumber === 0) {
+            let sub: Subscription = this.employeesService.update(this.idToModify, this.employeeToModify).subscribe(res => {
+                this.subsContainer.add(sub);
+                this.router.navigate([''])
+            });
 
-    // action!: string;
-
-    // newNames!: string;
-    // newSurnames!: string;
-    // newDni!: number;
-
-    // showError: boolean = false;
-    // errorMessage: string = "";
-
-    // modifyEmployee() {        
-    //     if (this.action === "delete") {
-    //         const errorNumber = this.employeesService.deleteEmployee(this.employeeToModify.id);
-    //         if (errorNumber === 0) {
-    //             this.router.navigate([''])
-    //         }
-    //         this.showError = true;
-    //         this.errorMessage = this.employeesService.getErrorMessage(errorNumber);
-    //     }
-    //     if (this.action === "edit") {
-    //         const errorNumber = this.employeesService.editEmployee(this.employeeToModify.id, this.newNames, this.newSurnames, this.newDni, this.positionsService.getPositionById(this.selectedPositionId));            
-    //         if (errorNumber === 0) {
-    //             this.router.navigate([''])
-    //         }
-    //         this.showError = true;
-    //         this.errorMessage = this.employeesService.getErrorMessage(errorNumber);
-    //     }
-    // }
-
+        }
+        this.showError = true;
+        this.errorMessage = this.employeesService.getErrorMessage(errorNumber);
+    }
 }

@@ -39,10 +39,9 @@ export class CreatePositionComponent implements OnDestroy {
 
         if (errorNumber === 0) {
             let sub: Subscription = this.positionsService.addNew(newPosition).subscribe(res => {
-                console.log(res);
+                this.subsContainer.add(sub);
                 this.router.navigate(['/positions']);
             });
-            this.subsContainer.add(sub);
         }
         this.showError = true;
         this.errorMessage = this.positionsService.getErrorMessage(errorNumber);

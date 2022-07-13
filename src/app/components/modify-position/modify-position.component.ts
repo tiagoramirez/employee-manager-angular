@@ -45,31 +45,20 @@ export class ModifyPositionComponent implements OnInit, OnDestroy {
     errorMessage: string = "";
 
     modifyPosition() {
-        if (this.action === "delete") {
-            const errorNumber = this.positionService.checkPosition(this.positionToModify);
-
-            if (errorNumber === 0) {
-                let sub: Subscription = this.positionService.deletePosition(this.idToModify, this.positionToModify).subscribe(r => {
-                    this.subsContainer.add(sub);
-                    this.router.navigate(['/positions']);
-                });
-            }
-            this.showError = true;
-            this.errorMessage = this.positionService.getErrorMessage(errorNumber);
+        const errorNumber = this.positionService.checkPosition(this.positionToModify);
+        if (this.action === "delete" && errorNumber === 0) {
+            let sub: Subscription = this.positionService.deletePosition(this.idToModify, this.positionToModify).subscribe(r => {
+                this.subsContainer.add(sub);
+                this.router.navigate(['/positions']);
+            });
         }
-
-        if (this.action === "edit") {
-            const errorNumber = this.positionService.checkPosition(this.positionToModify);
-
-            if (errorNumber === 0) {
-                let sub: Subscription = this.positionService.update(this.idToModify, this.positionToModify).subscribe(r => {
-                    this.subsContainer.add(sub);
-                    this.router.navigate(['/positions']);
-                });
-            }
-            this.showError = true;
-            this.errorMessage = this.positionService.getErrorMessage(errorNumber);
+        if (this.action === "edit" && errorNumber === 0) {
+            let sub: Subscription = this.positionService.update(this.idToModify, this.positionToModify).subscribe(r => {
+                this.subsContainer.add(sub);
+                this.router.navigate(['/positions']);
+            });
         }
+        this.showError = true;
+        this.errorMessage = this.positionService.getErrorMessage(errorNumber);
     }
-
 }

@@ -26,6 +26,7 @@ export class EmployeesService {
     }
 
     delete(id: string, employee: EmployeeI) {
+        employee.state = false;
         return this.dataService.updateEmployee(id, employee);
     }
 
@@ -33,7 +34,7 @@ export class EmployeesService {
         if (employee.names === '' || employee.names === undefined || employee.names === null) {
             return 1;
         }
-        
+
         if (employee.surnames === '' || employee.surnames === undefined || employee.surnames === null) {
             return 2;
         }
@@ -46,7 +47,7 @@ export class EmployeesService {
             return 4;
         }
 
-        if (employee.position === undefined || employee.position === null) {
+        if (employee.positionId === undefined || employee.positionId === null) {
             return 5;
         }
 

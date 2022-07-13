@@ -16,12 +16,14 @@ export class PositionsComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         let sub: Subscription = this.positionsService.getAll().subscribe(response => {
             this.cargando = false;
-            Object.entries(response).forEach(item => {
-                item[1].state ? this.positions.push({
-                    id: item[0],
-                    ...item[1]
-                }) : null;
-            })
+            if (response !== undefined && response !== null) {
+                Object.entries(response).forEach(item => {
+                    item[1].state ? this.positions.push({
+                        id: item[0],
+                        ...item[1]
+                    }) : null;
+                })
+            }
             this.subsContainer.add(sub);
         });
     }
@@ -31,6 +33,7 @@ export class PositionsComponent implements OnInit, OnDestroy {
     }
 
     positions: PositionI[] = [];
+
     cargando = true;
 
     subsContainer: SubscriptionContainer = new SubscriptionContainer();

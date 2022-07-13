@@ -1,9 +1,10 @@
-<!-- <div class="employee-name">
+<div class="employee-name">
     <p>{{employee.names}} {{employee.surnames}}</p>
 </div>
 
 <div class="employee-position">
-    <p>{{employee.position.name}}</p>
+    <p>{{positionName}}<span *ngIf="!isPositionActive" [routerLink]="['/modifyEmployee',employee.id]"
+            [queryParams]="{action:'edit'}"> (Posicion Borrada)</span></p>
 </div>
 
 <div class="employee-dni">
@@ -17,4 +18,4 @@
     <a [routerLink]="['/modifyEmployee',employee.id]" [queryParams]="{action:'edit'}" class="employee-edit">
         <i class="bi bi-pencil-square"></i>
     </a>
-</div> -->
+</div>
