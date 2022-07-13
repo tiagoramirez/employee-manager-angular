@@ -1,7 +1,7 @@
-import { Position } from "./position.model";
+import { PositionI } from "./position.interface";
 
 export class Employee {
-    constructor(id: number, names: string, surnames: string, dni: number, position: Position) {
+    constructor(id: number, names: string, surnames: string, dni: number, position: PositionI) {
         this.id = id;
         this.names = names;
         this.surnames = surnames;
@@ -15,7 +15,7 @@ export class Employee {
     names: string;
     surnames: string;
     dni: number;
-    position: Position;
+    position: PositionI;
     state: boolean;
     creationDate: Date;
 

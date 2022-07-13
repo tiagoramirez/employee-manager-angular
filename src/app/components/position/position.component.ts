@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Position } from '../models/position.model';
+import { PositionI } from '../../models/position.interface';
 
 @Component({
     selector: 'app-position',
@@ -7,5 +7,5 @@ import { Position } from '../models/position.model';
     styleUrls: ['./position.component.css']
 })
 export class PositionComponent {
-    @Input() position!: Position;
+    @Input() position!: PositionI;
 }

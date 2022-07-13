@@ -1,5 +1,7 @@
-    import { Injectable } from '@angular/core';
-import { Position } from '../models/position.model';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { SubscriptionContainer } from '../helpers/subscriptionContainer';
+import { PositionI } from '../models/position.interface';
 import { DataService } from './data.service';
 
 @Injectable({
@@ -9,71 +11,47 @@ export class PositionsService {
 
     constructor(private dataService: DataService) { }
 
-    private lastId: number = 2;
+    subsContainer: SubscriptionContainer = new SubscriptionContainer();
 
-    private positions: Position[] = [//hardcoded position for testing reasons
-        new Position(0, 'Jefe de jefes', 9999.99, 5),
-        new Position(1, 'Jefe de programadores', 7999.99, 3),
-        new Position(2, 'Programadores junior', 2300.99, 8),
-    ];
+    getAll(): Observable<PositionI[]> {
+        return this.dataService.getAllPositions();
+    }
 
-    addNewPosition(name: string, salary: number, floor: number): number {
-        if (name === '') {
+    addNew(position: PositionI): Observable<PositionI> {
+        return this.dataService.addNewPosition(position);
+    }
+
+    getById(id: string): Observable<PositionI> {
+        return this.dataService.getPositionById(id);
+    }
+
+    update(idToEdit: string, position: PositionI): Observable<PositionI> {
+        return this.dataService.updatePosition(idToEdit, position);
+    }
+
+    // deletePosition(id: number): number {
+    // }
+
+    checkPosition(position: PositionI): number {
+        if (position.name === '') {
             return 1;
         }
-        if (salary <= 0) {
+        if (position.salary <= 0) {
             return 2;
         }
-        if (salary === undefined || salary === null) {
+        if (position.salary === undefined || position.salary === null) {
             return 5;
         }
-        if (floor === undefined || floor === null) {
+        if (position.floor === undefined || position.floor === null) {
             return 4;
         }
-
-        this.positions.push(new Position(this.lastId + 1, name, salary, floor));
-        this.dataService.savePositions(this.positions);
-        this.lastId++;
-
         return 0;
-    }
-
-    getPositionById(id: number): Position {
-        return this.positions[id];
-    }
-
-    getPositions(): Position[] {
-        return this.positions.filter(pos => pos.state === true);
-    }
-
-    deletePosition(id: number): number {
-        try {
-            this.positions[id].state = false;
-            return 0;
-        } catch (error) {
-            return 3;
-        }
-    }
-
-    editPosition(idToEdit: number, newName: string, newSalary: number, newFloor: number): number {
-
-        if (newName == '') {
-            return 1;
-        }
-        if (newSalary <= 0) {
-            return 2;
-        }
-
-        try {
-            this.positions[idToEdit] = { id: idToEdit, name: newName, salary: newSalary, floor: newFloor, state: true, creationDate: new Date() }
-            return 0;
-        } catch (error) {
-            return 3;
-        }
     }
 
     getErrorMessage(errorNumber: number): string {
         switch (errorNumber) {
+            case 0:
+                return "";
             case 1:
                 return "El nombre no puede estar vacio.";
 

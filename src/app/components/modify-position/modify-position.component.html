@@ -4,19 +4,19 @@
     <div class="name-form">
         <label for="name">Nombre</label>
         <input type="text" name="name" placeholder="Nombre" [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newName" [ngClass]="{inputDisabled:action==='delete'}">
+            [(ngModel)]="positionToModify.name" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
 
     <div class="salary-form">
         <label for="salary">Salario</label>
         <input type="number" name="salary" placeholder="Salario" [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newSalary" [ngClass]="{inputDisabled:action==='delete'}">
+            [(ngModel)]="positionToModify.salary" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
 
     <div class="floor-form">
         <label for="floor">Piso</label>
         <input type="number" name="floor" placeholder="Piso" [attr.disabled]="action==='delete'?true:null"
-            [(ngModel)]="newFloor" [ngClass]="{inputDisabled:action==='delete'}">
+            [(ngModel)]="positionToModify.floor" [ngClass]="{inputDisabled:action==='delete'}">
     </div>
     <p style="color: red;" *ngIf="showError">{{errorMessage}}</p>
     <button type="button" *ngIf="action==='edit'" (click)="modifyPosition()"><i class="bi bi-pencil-square"></i>
