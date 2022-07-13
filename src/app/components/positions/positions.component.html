@@ -1,4 +1,12 @@
-<app-position *ngFor="let position of positions" [position]="position"></app-position>
+<h1>Posiciones</h1>
+
+<h2 *ngIf="positions.length==0 && !cargando">No hay posiciones cargadas</h2>
+
+<h3 *ngIf="cargando">Cargando...</h3>
+
+<div class="positions-container">
+    <app-position *ngFor="let position of positions" [position]="position"></app-position>
+</div>
 
 <a [routerLink]="['/createPosition']" class="floating-btn">
     <i class="bi bi-plus-circle-dotted"></i>

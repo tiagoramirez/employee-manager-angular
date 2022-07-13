@@ -2,10 +2,29 @@
     min-height: 80vh;
     width: 75vw;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+h1,
+h2,
+h3 {
+    color: #90afc5;
+}
+
+h2,
+h3 {
+    margin-top: 15rem;
+    text-align: center;
+}
+
+.positions-container {
+    margin-top: 1rem;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
 }
 
 .floating-btn {
