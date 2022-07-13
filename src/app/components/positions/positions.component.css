@@ -21,6 +21,7 @@ h3 {
 
 .positions-container {
     margin-top: 1rem;
+    margin-bottom: 1.5rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
